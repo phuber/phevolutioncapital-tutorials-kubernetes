@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kubernetes
+    group: de.phevolutioncapital.tutorials
+    provider: fabric8
+    version: 0.0.1-SNAPSHOT
+  name: lb
+  namespace: default
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: port-1
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: port-2
+    port: 9779
+    protocol: TCP
+    targetPort: 9779
+  - name: port-3
+    port: 8778
+    protocol: TCP
+    targetPort: 8778
+  selector:
+    app: kubernetes
+    group: de.phevolutioncapital.tutorials
+    provider: fabric8
+  sessionAffinity: None
+  type: LoadBalancer
